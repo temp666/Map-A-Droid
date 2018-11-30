@@ -27,3 +27,4 @@ venv/
 *.calc
 *.position
 geofence.txt
+.vs
