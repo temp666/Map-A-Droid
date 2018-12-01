@@ -21,6 +21,9 @@
             width: 100%;
             height: auto;
         }
+        .brandimg {
+            max-height: 20px;
+        }
     </style>
     
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -38,7 +41,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="#">                    
-                    <img src="{{ url_for('static', filename='banner_small_web.png') }}">
+                    <img src="{{ url_for('static', filename='banner_small_web.png') }}" class="brandimg">
                 </a>
                 <a class="navbar-brand" href="#">MADmin</a>
             </div>
@@ -54,7 +57,7 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid" role="main">
+    <div class="container" role="main">
         {% block content %}{% endblock %}
     </div>
     
