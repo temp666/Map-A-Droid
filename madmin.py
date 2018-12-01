@@ -54,7 +54,7 @@ def after_request(response):
 
 @app.route('/screens', methods=['GET'])
 def screens():
-    return render_template('screens.html', responsive = str(args.madmin_noresponsive).lower())
+    return render_template('screens.html', responsive = str(args.madmin_noresponsive).lower(), title = "show success Screens")
 
 @app.route('/', methods=['GET'])
 def root():
@@ -70,11 +70,11 @@ def gyms():
 
 @app.route('/unknown', methods=['GET'])
 def unknown():
-    return render_template('unknown.html', responsive = str(args.madmin_noresponsive).lower()) 
+    return render_template('unknown.html', responsive = str(args.madmin_noresponsive).lower(), title = "show unknown Gym") 
 
 @app.route('/map', methods=['GET'])
 def map():
-    return render_template('map.html')
+    return render_template('map.html', title = "Map")
 
 @app.route("/submit_hash")
 def submit_hash():
@@ -457,7 +457,7 @@ def match_unknows():
     hash = request.args.get('hash')
     lat = request.args.get('lat')
     lon = request.args.get('lon')
-    return render_template('match_unknown.html', hash = hash, lat = lat, lon = lon, responsive = str(args.madmin_noresponsive).lower())
+    return render_template('match_unknown.html', hash = hash, lat = lat, lon = lon, responsive = str(args.madmin_noresponsive).lower(), title = "match Unknown")
 
 @app.route('/modify_raid', methods=['GET'])
 def modify_raid():
@@ -466,21 +466,21 @@ def modify_raid():
     lon = request.args.get('lon')
     lvl = request.args.get('lvl')
     mon = request.args.get('mon')
-    return render_template('change_raid.html', hash = hash, lat = lat, lon = lon, lvl = lvl, mon = mon, responsive = str(args.madmin_noresponsive).lower())
+    return render_template('change_raid.html', hash = hash, lat = lat, lon = lon, lvl = lvl, mon = mon, responsive = str(args.madmin_noresponsive).lower(), title = "change Raid")
 
 @app.route('/modify_gym', methods=['GET'])
 def modify_gym():
     hash = request.args.get('hash')
     lat = request.args.get('lat')
     lon = request.args.get('lon')
-    return render_template('change_gym.html', hash = hash, lat = lat, lon = lon, responsive = str(args.madmin_noresponsive).lower())
+    return render_template('change_gym.html', hash = hash, lat = lat, lon = lon, responsive = str(args.madmin_noresponsive).lower(), title = "change Gym")
 
 @app.route('/modify_mon', methods=['GET'])
 def modify_mon():
     hash = request.args.get('hash')
     gym = request.args.get('gym')
     lvl = request.args.get('lvl')
-    return render_template('change_mon.html', hash = hash, gym = gym, lvl = lvl, responsive = str(args.madmin_noresponsive).lower())
+    return render_template('change_mon.html', hash = hash, gym = gym, lvl = lvl, responsive = str(args.madmin_noresponsive).lower(), title = "change Mon")
 
 @app.route('/asset/<path:path>', methods=['GET'])
 def pushAssets(path):
