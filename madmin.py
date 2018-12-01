@@ -62,7 +62,7 @@ def root():
 
 @app.route('/raids', methods=['GET'])
 def raids():
-    return render_template('raids.html', sort = str(args.madmin_sort), responsive = str(args.madmin_noresponsive).lower())
+    return render_template('raids.html', sort = str(args.madmin_sort), responsive = str(args.madmin_noresponsive).lower(), title = "show Gym Matching")
     
 @app.route('/gyms', methods=['GET'])
 def gyms():
