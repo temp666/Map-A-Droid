@@ -66,7 +66,7 @@ def raids():
     
 @app.route('/gyms', methods=['GET'])
 def gyms():
-    return render_template('gyms.html', sort = str(args.madmin_sort), responsive = str(args.madmin_noresponsive).lower()) 
+    return render_template('gyms.html', sort = str(args.madmin_sort), responsive = str(args.madmin_noresponsive).lower(), title = "show Gym Matching") 
 
 @app.route('/unknown', methods=['GET'])
 def unknown():
