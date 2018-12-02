@@ -25,7 +25,7 @@
                     {
                         targets: [0],
                         render: function (data, type, row) {
-                            return data + "<br /><br />Hashvalue: " + row.hashvalue + "<br /><br />Matchcount: " + row.count;
+                            return data + "<br />Hashvalue: " + row.hashvalue + "<br />Matchcount: " + row.count;
                         },
                     },
                     {
@@ -70,7 +70,7 @@
                             var modifyMon = "<a href='/modify_mon?hash=" + row.hashvalue + "&lvl=" + row.level + "&gym=" + row.id + "&mon=" + row.mon + "&lvl=" + row.level + "'>Change Mon</a>";
                             var deleteHash = "<a href='/delete_hash?hash=" + row.hashvalue + "&type=raid&redirect=raids'>Delete</a>";
 
-                            return modifyRaid + "<br /><br/>" + modifyMon + "<br /><br />" + deleteHash;
+                            return modifyRaid + "<br />" + modifyMon + "<br />" + deleteHash;
                         }
                     }
                 ],
