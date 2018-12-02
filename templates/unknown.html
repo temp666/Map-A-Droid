@@ -11,22 +11,22 @@
             $("#navunknown").addClass("active");
 
             $('#show-data').dataTable({
-                column: [
-                    { data: 'hashvalue', title: 'Hash'},
-                    { data: 'filename', title: 'Hashpic'},
-                    { data: 'lat', title: 'Lat'},
-                    { data: 'lon', title: 'Lon'},
-                    { data: 'creation', title: 'Creation Date', type: 'date'},
+                "column": [
+                    { data: 'hashvalue', title: 'Hash' },
+                    { data: 'filename', title: 'Hashpic' },
+                    { data: 'lat', title: 'Lat' },
+                    { data: 'lon', title: 'Lon' },
+                    { data: 'creation', title: 'Creation Date', type: 'date' }
                 ],
-                columnDefs: [
+                "columnDefs": [
                     {
                         targets: [0],
                         render: function (data, type, row) {
-                            var matchunknowns = "<a href='/match_unknows?hash=" + result[i].hashvalue + "&lat=" + result[i].lat + "&lon=" + result[i].lon + "'>Match Gym</a>";
-                            var deletefile = "<a href='/delete_file?hash=" + result[i].hashvalue + "&type=gym&redirect=unknown'>Delete</a>";
+                            var matchunknowns = "<a href='/match_unknows?hash=" + row.hashvalue + "&lat=" + row.lat + "&lon=" + row.lon + "'>Match Gym</a>";
+                            var deletefile = "<a href='/delete_file?hash=" + row.hashvalue + "&type=gym&redirect=unknown'>Delete</a>";
 
                             return data + "<br /><br />" + matchunknowns + "<br />" + deletefile;
-                        },
+                        }
                     },
                     {
                         targets: [1],
@@ -54,7 +54,7 @@
                             if (row.lat === "9999") {
                                 vlon = 'MADBot'
                             } else {
-                                vlon = result[i].lon
+                                vlon = row.lon
                             }
 
                             return vlon;
@@ -64,7 +64,7 @@
                 "drawCallback": function () {
                     $("img.lazy").lazyload();
                 },
-                "order": [[4, "desc"]],
+                "order": [[4, "desc" ]],
                 "responsive": {{ responsive }},
                 "autoWidth": true,
                 "ajax": "/get_unknows"
