@@ -374,7 +374,8 @@ def get_unknows():
     unk = []
     for file in glob.glob("www_hash/unkgym_*.jpg"):
         unkfile = re.search('unkgym_(-?\d+\.?\d+)_(-?\d+\.?\d+)_((?s).*)\.jpg', file)
-        creationdate = datetime.datetime.fromtimestamp(creation_date(file)).strftime('%Y-%m-%d %H:%M:%S')
+        #creationdate = datetime.datetime.fromtimestamp(creation_date(file)).strftime('%Y-%m-%d %H:%M:%S')
+        creationdate = datetime.datetime.fromtimestamp(creation_date(file)).isoformat()
         lat = (unkfile.group(1))
         lon = (unkfile.group(2))
         hashvalue = (unkfile.group(3))
