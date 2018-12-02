@@ -67,7 +67,15 @@
                 "order": [[4, "desc" ]],
                 "responsive": {{ responsive }},
                 "autoWidth": true,
-                "ajax": "/get_unknows"
+                "ajax": {
+                    "dataType": 'json',
+                    "contentType": "application/json; charset=utf-8",
+                    "type": "GET",
+                    "url":"get_unknows",
+                    "dataSrc": function (json) {
+                        return $.parseJSON(json.d);
+                    }
+                },
             });
         });
     </script>
