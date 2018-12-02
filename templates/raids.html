@@ -10,7 +10,7 @@
         $(document).ready(function () {
             $("#navraids").addClass("active");
 
-            $('#showdata').dataTable({
+            $('#show-data').dataTable({
                 "columns": [
                     { data: 'name', title: 'Name' },
                     { data: 'filename', title: 'Hashpic' },
@@ -88,7 +88,7 @@
 
 {% block content %}
     <h2>Check saved Raids</h2>
-    <div id="show-data"></div>
+    <table id="show-data" class="table"></table>
 {% endblock %}
 
 
