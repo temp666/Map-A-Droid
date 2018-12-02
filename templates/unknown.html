@@ -73,7 +73,9 @@
                     "type": "GET",
                     "url":"get_unknows",
                     "dataSrc": function (json) {
-                        return $.parseJSON(json.d);
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        return $.parseJSON(json);
                     }
                 },
             });
