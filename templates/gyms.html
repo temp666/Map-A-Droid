@@ -18,10 +18,6 @@
                 { data: 'count', title: 'Matchcount' },
                 { data: 'modify', title: 'Last Modify', type: 'date' },
                 { data: 'creation', title: 'Creation Date', type: 'date' },
-                { data: 'id', title: ''},
-                { data: 'lat', title: ''},
-                { data: 'lon', title: ''},                
-                { data: 'description', title: ''},
                 { data: '', title: 'Actions' }
             ],
             "columnDefs": [
@@ -32,11 +28,7 @@
                     }
                 },
                 {
-                    "targets": [7, 8, 9, 10],
-                    "visible": false
-                },
-                {
-                    "targets:": [11],
+                    "targets": [7],
                     "render": function (data, type, row) {
                         var modifyGym = "<a href='/modify_gym?hash=" + row.hashvalue + "&lat=" + row.lat + "&lon=" + row.lon + "'>Change Gym</a>";
                         var deleteHash = "<a href='/delete_hash?hash=" + row.hashvalue + "&type=gym&redirect=gyms'>Delete</a>";
