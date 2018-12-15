@@ -35,10 +35,6 @@
     $(document).ready(function () {
         $("#navscreens").addClass("active");
 
-        var displayResources = $('#show-data');
-
-        displayResources.text('Loading data ...');
-
         $.ajax({
             type: "GET",
             url: "/get_screens",
@@ -51,6 +47,10 @@
 {% endblock %}
 
 {% block content %}
+{% if title %}
+<h2>{{ title }}</h2>
+{% else %}
 <h2>Show Screens</h2>
-<div id="show-data"></div>
+{% endif %}
+<table id="show-data" class="table"></table>
 {% endblock %}

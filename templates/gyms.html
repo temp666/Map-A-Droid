@@ -61,6 +61,10 @@
 {% endblock %}
 
 {% block content %}
+{% if title %}
+<h2>{{ title }}</h2>
+{% else %}
 <h2>Check saved Gyms</h2>
-<div id="show-data"></div>
+{% endif %}
+<table id="show-data" class="table"></table>
 {% endblock %}
