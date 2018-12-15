@@ -526,6 +526,7 @@ def creation_date(path_to_file):
             return stat.st_mtime
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='0.0.0.0')
+    #app.run()
     #host='0.0.0.0', port=int(args.madmin_port), threaded=False)
 

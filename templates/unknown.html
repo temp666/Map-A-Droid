@@ -4,13 +4,16 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $("#navunknown").addClass("active");
+<script>
+    function setGrid(tableGridHtmlId, gridData) {
+        var grid;
 
-            $('#show-data').dataTable({
+        if ($.fn.dataTable.isDataTable(tableGridHtmlId)) {
+            grid = $(tableGridHtmlId).DataTable();
+        } else {
+            grid = $(tableGridHtmlId).DataTable({
                 "columns": [
                     { data: 'hashvalue', title: 'Hash' },
                     { data: 'filename', title: 'Hashpic' },
@@ -20,8 +23,8 @@
                 ],
                 "columnDefs": [
                     {
-                        targets: [0],
-                        render: function (data, type, row) {
+                        "targets": [0],
+                        "render": function (data, type, row) {
                             var matchunknowns = "<a href='/match_unknows?hash=" + row.hashvalue + "&lat=" + row.lat + "&lon=" + row.lon + "'>Match Gym</a>";
                             var deletefile = "<a href='/delete_file?hash=" + row.hashvalue + "&type=gym&redirect=unknown'>Delete</a>";
 
@@ -29,14 +32,14 @@
                         }
                     },
                     {
-                        targets: [1],
-                        render: function (data, type, row) {
+                        "targets": [1],
+                        "render": function (data, type, row) {
                             return "<img class='lazy' data-original='../" + data + "' width=100>";
                         }
                     },
                     {
-                        targets: [2],
-                        render: function (data, type, row) {
+                        "targets": [2],
+                        "render": function (data, type, row) {
                             var vlat = "";
                             if (row.lat === "9999") {
                                 vlat = 'MADBot'
@@ -44,12 +47,12 @@
                                 vlat = row.lat
                             }
 
-                            return vlat;
+                            return "" + vlat;
                         }
                     },
                     {
-                        targets: [3],
-                        render: function (data, type, row) {
+                        "targets": [3],
+                        "render": function (data, type, row) {
                             var vlon = "";
                             if (row.lat === "9999") {
                                 vlon = 'MADBot'
@@ -57,30 +60,37 @@
                                 vlon = row.lon
                             }
 
-                            return vlon;
+                            return "" + vlon;
+                        }
+                    },
+                    {
+                        "targets": [4],
+                        "render": function (data, trype, row) {
+                            return "" + data;
                         }
                     }
                 ],
                 "drawCallback": function () {
                     $("img.lazy").lazyload();
                 },
-                "order": [[4, "desc" ]],
+                "order": [[4, "desc"]],
                 "responsive": {{ responsive }},
-                "autoWidth": true,
-                "ajax": {
-                    "dataType": 'json',
-                    "contentType": "application/json; charset=utf-8",
-                    "type": "GET",
-                    "url":"get_unknows",
-                    "dataSrc": function (json) {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        return $.parseJSON(json);
-                    }
-                },
+                "autoWidth": true
             });
+        }
+    }
+
+    $(document).ready(function () {
+        $("#navunknown").addClass("active");
+
+        $.ajax({
+            type: "GET",
+            url: "/get_unknows",
+            success: function (result) {
+                setGrid('#show-data', result);
+            }
         });
-    </script>
+</script>
 {% endblock %}
 
 {% block content %}
