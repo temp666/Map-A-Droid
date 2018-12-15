@@ -4,39 +4,61 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        $(document).ready(function () {
-
-            var displayResources = $('#show-data');
-
-            displayResources.text('Loading data ...');
-
-            $.ajax({
-                type: "GET",
-                url: "/near_gym?lat={{ lat }}&lon={{ lon }}",
-                success: function (result) {
-                    console.log(result);
-                    var output = "<table><thead><tr><th>Name</th><th>Hashpic</th><th>Distance</th><th>Match</th></thead><tbody>";
-                    for (var i in result) {
-                        output += "<tr><td>" + result[i].name + "<br><br>Gym-ID: " + result[i].id + "</td><td><img src='" + result[i].filename + "' width=100></td><td>" + result[i].dist + "</td><td><a href='modify_raid_gym?hash={{ hash }}&id=" + result[i].id + "&mon={{ mon }}&lvl={{ lvl }}'>Match to this Gym</a> </td></tr>";
+<script>
+    function setGrid(tableGridHtmlId, gridData) {
+        $(tableGridHtmlId).DataTable({
+            "data": gridData,
+            "columns": [
+                { data: 'name', title: 'Name' },
+                { data: 'filename', title: 'Hashpic' },
+                { data: 'dist', title: 'Distance' },
+                { data: 'id', title: 'Match' }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [0],
+                    "render": function (data, type, row) {
+                        return data + "<br /><br />Gym-ID: " + row.id;
                     }
-                    output += "</tbody></table>";
-
-                    displayResources.html(output);
-                    $("table").addClass("table");
-                    $('table').DataTable({
-                        responsive: {{ responsive }},
-                        "order": [[2, "asc"]],
-                        "autoWidth": true
-                    });
+                },
+                {
+                    "targets": [1],
+                    "render": function (data, type, row) {
+                        return "<img class='lazy' data-original='" + data + "' width=100>";
+                    }
+                },
+                {
+                    "targets": [3],
+                    "render": function (data, type, row) {
+                        return "<a href='modify_raid_gym?hash={{ hash }}&id=" + data + "&mon={{ mon }}&lvl={{ lvl }}'>Match to this Gym</a>";
+                    }
                 }
-            });
+            ],
+            "drawCallback": function () {
+                $("img.lazy").lazyload();
+            },
+            "order": [[2, "desc"]],
+            "responsive": {{ responsive }},
+            "autoWidth": true
         });
-    </script>
+    }
+
+    $(document).ready(function () {
+        $("#navraids").addClass("active");
+
+        $.ajax({
+            type: "GET",
+            url: "/near_gym?lat={{ lat }}&lon={{ lon }}",
+            success: function (result) {
+                setGrid('#show-data', result);
+            }
+        });
+    });
+</script>
 {% endblock %}
 
 {% block content %}
-    <h2>Modify existing Raid</h2>
-    <h4><a href="/raids">Back to Raids</a></h4>
-    <div id="show-data"></div>
+<h2>Modify existing Raid</h2>
+<h4><a href="/raids">Back to Raids</a></h4>
+<table id="show-data" class="table"></table>
 {% endblock %}

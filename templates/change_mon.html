@@ -4,39 +4,57 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
-        $(document).ready(function () {
-
-            var displayResources = $('#show-data');
-
-            displayResources.text('Loading data ...');
-
-            $.ajax({
-                type: "GET",
-                url: "/get_mons",
-                success: function (result) {
-                    console.log(result);
-                    var output = "<table><thead><tr><th>Name</th><th>ID</th><th>Level</th><th>Pic</th><th>Match</th></thead><tbody>";
-                    for (var i in result) {
-                        output += "<tr><td>" + result[i].name + "</td><td>" + result[i].mon + "</td><td>" + result[i].lvl + "</td><td><img src='" + result[i].filename + "' width=100></td><td><a href='modify_raid_mon?hash={{ hash }}&mon=" + result[i].mon + "&gym={{ gym }}&lvl={{ lvl }}'>Match this </a> </td></tr>";
+<script>
+    function setGrid(tableGridHtmlId, gridData) {
+        $(tableGridHtmlId).DataTable({
+            "data": gridData,
+            "columns": [
+                { data: 'name', title: 'Name' },
+                { data: 'mon', title: 'ID' },
+                { data: 'lvl', title: 'Level' },
+                { data: 'filename', title: 'Pic' },
+                { data: 'mon', title: 'Match' }
+            ],
+            "columnDefs": [
+                {
+                    "targets": [3],
+                    "render": function (data, type, row) {
+                        return "<img class='lazy' data-original='" + data + "' width=100>";
                     }
-                    output += "</tbody></table>";
-
-                    displayResources.html(output);
-                    $("table").addClass("table");
-                    $('table').DataTable({
-                        responsive: {{ responsive }},
-                        "order": [[1, "asc"]],
-                        "autoWidth": true
-                    });
+                },
+                {
+                    "targets": [4],
+                    "render": function (data, type, row) {
+                        return "<a href='modify_raid_mon?hash={{ hash }}&mon=" + result[i].mon + "&gym={{ gym }}&lvl={{ lvl }}'>Match this </a>";
+                    }
                 }
-            });
+            ],
+            "drawCallback": function () {
+                $("img.lazy").lazyload();
+            },
+            "order": [[1, "asc"]],
+            "responsive": {{ responsive }},
+            "autoWidth": true
         });
-    </script>
+    }
+
+
+    $(document).ready(function () {
+        $("#navraids").addClass("active");
+
+        $.ajax({
+            type: "GET",
+            url: "/get_mons",
+            success: function (result) {
+                setGrid('#show-data', result);
+            }
+        });
+    });
+</script>
 {% endblock %}
 
 {% block content %}
-    <h2>Modify detecting Mon</h2>
-    <h4><a href="/raids">Back to Raids</a></h4>
-    <div id="show-data"></div>
+<h2>Modify detecting Mon</h2>
+<h4><a href="/raids">Back to Raids</a></h4>
+<table id="show-data" class="table"></table>
 {% endblock %}

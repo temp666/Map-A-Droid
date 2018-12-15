@@ -26,8 +26,8 @@
             "drawCallback": function () {
                 $("img.lazy").lazyload();
             },
-            //"order": [[2, "desc"]],
-            //"responsive": {{ responsive }},
+            "order": [[2, "desc"]],
+            "responsive": {{ responsive }},
             "autoWidth": true
         });
     }
@@ -47,10 +47,6 @@
 {% endblock %}
 
 {% block content %}
-{% if title %}
-<h2>{{ title }}</h2>
-{% else %}
 <h2>Show Screens</h2>
-{% endif %}
 <table id="show-data" class="table"></table>
 {% endblock %}
