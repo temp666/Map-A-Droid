@@ -15,10 +15,12 @@
                 { data: 'hashvalue', title: 'Hash' },
                 { data: 'filename', title: 'Hashpic' },
                 { data: 'gymimage', title: 'Gympic' },
-                { data: 'lon', title: 'Matchcount' },
+                { data: 'count', title: 'Matchcount' },
                 { data: 'modify', title: 'Last Modify', type: 'date' },
                 { data: 'creation', title: 'Creation Date', type: 'date' },
-                { data: '', title: 'Actions' }
+                { data: '', title: 'Actions' },
+                { data: 'lat', title: ''},
+                { data: 'lon', title: ''}
             ],
             "columnDefs": [
                 {
@@ -35,6 +37,10 @@
 
                         return modifyGym + "<br />" + deleteHash;
                     }
+                },
+                {
+                    "targets": [8,9],
+                    "visible": false
                 }
             ],
             "drawCallback": function () {
