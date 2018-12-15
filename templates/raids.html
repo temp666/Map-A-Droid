@@ -22,20 +22,20 @@
             ],
             "columnDefs": [
                 {
-                    targets: [0],
-                    render: function (data, type, row) {
+                    "targets": [0],
+                    "render": function (data, type, row) {
                         return data + "<br />Hashvalue: " + row.hashvalue + "<br />Matchcount: " + row.count;
                     },
                 },
                 {
-                    targets: [1, 2],
-                    render: function (data, type, row) {
+                    "targets": [1, 2],
+                    "render": function (data, type, row) {
                         return "<img class='lazy' data-original='" + data + "' width=100>";
                     }
                 },
                 {
-                    targets: [3],
-                    render: function (data, type, row) {
+                    "targets": [3],
+                    "render": function (data, type, row) {
                         var monegg = "";
                         var monName = "";
                         if (row.type === "egg") {
@@ -50,8 +50,8 @@
                     }
                 },
                 {
-                    targets: [4],
-                    render: function (data, type, row) {
+                    "targets": [4],
+                    "render": function (data, type, row) {
                         var lvl = "";
                         if (row.type === "egg") {
                             lvl = 'Egg'
@@ -63,8 +63,8 @@
                     }
                 },
                 {
-                    targets: [7],
-                    render: function (data, type, row) {
+                    "targets": [7],
+                    "render": function (data, type, row) {
                         var modifyRaid = "<a href='/modify_raid?hash=" + row.hashvalue + "&lat=" + row.lat + "&lon=" + row.lon + "&mon=" + row.mon + "&lvl=" + row.level + "'>Change Gym</a>";
                         var modifyMon = "<a href='/modify_mon?hash=" + row.hashvalue + "&lvl=" + row.level + "&gym=" + row.id + "&mon=" + row.mon + "&lvl=" + row.level + "'>Change Mon</a>";
                         var deleteHash = "<a href='/delete_hash?hash=" + row.hashvalue + "&type=raid&redirect=raids'>Delete</a>";

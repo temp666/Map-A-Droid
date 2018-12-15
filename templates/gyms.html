@@ -18,9 +18,7 @@
                 { data: 'count', title: 'Matchcount' },
                 { data: 'modify', title: 'Last Modify', type: 'date' },
                 { data: 'creation', title: 'Creation Date', type: 'date' },
-                { data: '', title: 'Actions' },
-                { data: 'lat', title: ''},
-                { data: 'lon', title: ''}
+                { data: '', title: 'Actions' }
             ],
             "columnDefs": [
                 {
@@ -32,16 +30,11 @@
                 {
                     "targets:": [7],
                     "render": function (data, type, row) {
-                        console.log(row);
                         var modifyGym = "<a href='/modify_gym?hash=" + row.hashvalue + "&lat=" + row.lat + "&lon=" + row.lon + "'>Change Gym</a>";
                         var deleteHash = "<a href='/delete_hash?hash=" + row.hashvalue + "&type=gym&redirect=gyms'>Delete</a>";
 
                         return modifyGym + "<br />" + deleteHash;
                     }
-                },
-                {
-                    "targets": [8,9],
-                    "visible": false
                 }
             ],
             "drawCallback": function () {
@@ -60,6 +53,7 @@
             type: "GET",
             url: "/get_gyms",
             success: function (result) {
+                console.log(result);
                 setGrid('#show-data', result);
             }
         });
